@@ -33,7 +33,7 @@ The portal provides an operational hierarchy with role-based access:
 
 ## ⚙️ Environment Variables Setup (`.env`)
 
-Create `frontend-client/.env` with your Firebase Web SDK and API settings:
+Create `frontend-admin/.env` with your Firebase Web SDK and API settings:
 
 ```env
 VITE_API_URL=http://localhost:5000
@@ -72,7 +72,7 @@ npm run preview
 ## 📁 Source Code Structure
 
 ```
-frontend-client/
+frontend-admin/
 ├── src/
 │   ├── components/admin/
 │   │   ├── AdminHeader.jsx          # Municipal navigation bar, role badge, user switcher
@@ -97,3 +97,37 @@ frontend-client/
 ├── .gitignore                       # Git ignore rules
 └── vite.config.js                   # Vite configuration
 ```
+
+---
+
+## 👥 Officer Hierarchy & Account Management (`/admin/officers`)
+
+Super Admins have full authority to create, configure, update, and manage all municipal staff accounts directly from the Web UI:
+
+### 1. Initial Login as Super Admin
+1. Navigate to: **`http://localhost:5174/admin/login`**
+2. Sign in with the bootstrapped Super Admin credentials (created via `backend/scripts/initSuperAdmin.js`):
+   - **Default Email:** `admin@municipal.gov.in`
+   - **Default Password:** `CivicAdmin@2026`
+
+### 2. Creating Municipal Officers via Web UI
+Navigate to **Manage Officers** (`/admin/officers`) from the sidebar:
+- **Available Roles:**
+  1. **Managing Officer (`managing_officer`):** Citywide supervisory privileges across all wards.
+  2. **Ward Officer (`ward_officer`):** Ward-level dispatch and ticket supervision.
+  3. **Field Officer (`field_officer`):** On-site repair crew, uploads fix proof and changes status.
+- **Required Details:**
+  - Full Name & Official Email
+  - Initial Password (minimum 6 characters)
+  - Assigned Ward (select assigned ward or "All Wards" for Managing Officer)
+  - Department (Roads, Sanitation, Water Supply, Electricity, Horticulture)
+  - Mobile Number
+
+### 3. Modifying & Deactivating Officer Accounts
+- **Toggle Leave / Active Status:** Change officer operational status to ensure tickets are not routed to officers on leave.
+- **Delete / Revoke Credentials:** Instantly revoke access and delete the officer from Firebase Auth and MongoDB.
+- **Resetting Passwords:** Can be executed via the backend CLI tool:
+  ```bash
+  cd backend && node scripts/resetPassword.js <officer_email> <new_password>
+  ```
+

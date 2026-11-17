@@ -118,3 +118,49 @@ npm run dev
 npm start
 ```
 - Health Check: `http://localhost:5000/health`
+
+---
+
+## 🔐 Administrative CLI Scripts & Account Management
+
+The backend includes purpose-built CLI scripts in `backend/scripts/` to bootstrap administrators, update credentials, and reset passwords without manual database edits:
+
+### 1. Bootstrap / Create Initial Super Admin
+Creates a new Super Admin account in Firebase Auth and MongoDB with custom claims `{ role: 'super_admin' }`:
+```bash
+node scripts/initSuperAdmin.js <email> [optional_password]
+```
+- **Example:**
+  ```bash
+  node scripts/initSuperAdmin.js admin@municipal.gov.in CivicAdmin@2026
+  ```
+- *Default Password (if omitted):* `CivicAdmin@2026`
+- *Behavior:* If the email already exists in Firebase, it enables the account, updates the password, and synchronizes the MongoDB user record.
+
+### 2. Reset Password for Any Account
+Safely resets the Firebase password for any account (Super Admin, Managing Officer, Ward Officer, Field Crew, or Citizen):
+```bash
+node scripts/resetPassword.js <email> <new_password>
+```
+- **Example:**
+  ```bash
+  node scripts/resetPassword.js admin@municipal.gov.in MyNewSecurePassword@2026
+  ```
+- *Requirement:* Password must be at least 6 characters long.
+
+### 3. Change Super Admin Email
+Migrates an existing Super Admin account to a new email address across both Firebase Auth and MongoDB:
+```bash
+node scripts/changeSuperAdminEmail.js <old_email> <new_email>
+```
+- **Example:**
+  ```bash
+  node scripts/changeSuperAdminEmail.js admin@municipal.gov.in commissioner@delhicivic.gov.in
+  ```
+
+### 4. Wipe Test Complaints & Notifications (Fresh Demo State)
+Clears all complaints and notifications from MongoDB while preserving officer accounts and ward configurations:
+```bash
+node scripts/clearAllData.js
+```
+

@@ -138,6 +138,58 @@ The administrative portal (`frontend-admin`) implements a 4-tier operational hie
 
 ---
 
+## 🔐 Super Admin & Officer Account Management
+
+The platform provides CLI automation tools and Web UI interfaces for initializing, managing, and resetting administrator and officer credentials:
+
+### 1. Bootstrapping the Super Admin Account (CLI)
+Before signing into the Admin Portal for the first time, initialize the Super Admin account via the backend CLI helper:
+```bash
+cd backend
+node scripts/initSuperAdmin.js <email> [optional_password]
+```
+- **Example:**
+  ```bash
+  node scripts/initSuperAdmin.js admin@municipal.gov.in CivicAdmin@2026
+  ```
+- *Default Password (if omitted):* `CivicAdmin@2026`
+- *Automatic Sync:* Creates the account in Firebase Auth with `{ role: 'super_admin' }` custom claims and provisions the user record in MongoDB.
+
+### 2. Signing In to the Municipal Portal
+- **Login URL:** `http://localhost:5174/admin/login`
+- **Default Super Admin Credentials:**
+  - **Email:** `admin@municipal.gov.in`
+  - **Password:** `CivicAdmin@2026`
+
+### 3. Creating & Managing Officers via Web Portal (`/admin/officers`)
+Logged-in Super Admins can manage all municipal staff directly from the Web UI:
+- **Add Officer:** Navigate to **Manage Officers** (`/admin/officers`) and configure:
+  - Full Name, Official Email, Initial Password (minimum 6 characters)
+  - Operational Role (`Managing Officer`, `Ward Officer`, or `Field Officer`)
+  - Assigned Ward (select assigned ward or "All Wards" for Managing Officer)
+  - Department (Roads, Sanitation, Water Supply, Electricity, etc.)
+- **Deactivate / Delete:** Instantly toggle officer leave status or revoke credentials.
+
+### 4. Password Reset & Email Update CLI Helpers
+- **Reset Any User or Officer Password:**
+  ```bash
+  cd backend
+  node scripts/resetPassword.js <email> <new_password>
+  ```
+- **Change Super Admin Email:**
+  ```bash
+  cd backend
+  node scripts/changeSuperAdminEmail.js <old_email> <new_email>
+  ```
+- **Wipe Test Complaints (Fresh Demo Database):**
+  ```bash
+  cd backend
+  node scripts/clearAllData.js
+  ```
+
+
+---
+
 ## 🗺️ Leaflet GIS Map Console & Hotspots
 
 The Municipal Map Console (`/admin/map`) provides GIS intelligence:
