@@ -1,0 +1,113 @@
+# =============================================================================
+# Root .gitignore - Civic Issue Reporting & Management Platform
+# =============================================================================
+
+# --- Environment & Secret Configuration Files ---
+.env
+.env.*
+!.env.example
+!**/.env.example
+CIVIC_PROJECT_ENV_AND_SETUP_GUIDE.pdf
+generate_guide_pdf.py
+*.pdf
+serviceAccountKey.json
+**/serviceAccountKey.json
+*credentials*.json
+**/*credentials*.json
+*.pem
+*.key
+*.p12
+
+# --- Dependency Directories ---
+node_modules/
+**/node_modules/
+venv/
+**/venv/
+env/
+**/env/
+ENV/
+**/ENV/
+
+# --- Build Outputs ---
+dist/
+**/dist/
+dist-ssr/
+**/dist-ssr/
+build/
+**/build/
+out/
+**/out/
+
+# --- Python Cache & Bytecode ---
+__pycache__/
+**/__pycache__/
+*.py[cod]
+**/*.py[cod]
+*$py.class
+*.so
+.Python
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# --- Machine Learning Model Weights & Large Checkpoints ---
+# (Prevent pushing multi-gigabyte models into Git)
+models/
+**/models/
+*.pt
+**/*.pt
+*.pth
+**/*.pth
+*.bin
+**/*.bin
+*.safetensors
+**/*.safetensors
+*.onnx
+**/*.onnx
+.cache/
+**/.cache/
+
+# --- Uploads, Temporary Media & Logs ---
+uploads/
+**/uploads/
+logs/
+**/logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Operating System Artifacts ---
+.DS_Store
+**/.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+**/Thumbs.db
+desktop.ini
+
+# --- IDE & Editor Configs ---
+.idea/
+**/.idea/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.bak

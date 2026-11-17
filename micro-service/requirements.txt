@@ -1,0 +1,15 @@
+# Civic AI Microservice Requirements
+# Compatible with Python 3.13 and Florence-2 on CUDA / CPU
+# Install with: pip install -r requirements.txt
+
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+python-multipart>=0.0.9
+pydantic>=2.6.0
+Pillow>=10.0.0
+transformers>=4.45.0,<=4.48.3
+sentence-transformers>=3.0.0,<4.0.0
+einops>=0.7.0
+timm>=0.9.0
+numpy>=1.24.0
+httpx>=0.27.0
