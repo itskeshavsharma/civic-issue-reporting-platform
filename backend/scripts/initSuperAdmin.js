@@ -1,4 +1,10 @@
 require('dotenv').config();
+const dns = require('dns');
+// Set public DNS servers to resolve MongoDB Atlas SRV records on networks/ISPs with querySrv issues
+try {
+  dns.setServers(['8.8.8.8', '1.1.1.1']);
+} catch (_) {}
+
 const mongoose = require('mongoose');
 const { admin, auth } = require('../config/firebase');
 const User = require('../models/User');
@@ -30,7 +36,7 @@ async function initSuperAdmin() {
     process.exit(1);
   }
 
-  const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/civic_db';
+  const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/civic_db';
   await mongoose.connect(mongoUri);
   console.log('[Connected] MongoDB connected successfully.');
 

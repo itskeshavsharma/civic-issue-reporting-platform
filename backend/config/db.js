@@ -1,4 +1,10 @@
 const mongoose = require('mongoose');
+const dns = require('dns');
+
+// Configure reliable DNS servers for MongoDB Atlas SRV connection strings
+try {
+  dns.setServers(['8.8.8.8', '1.1.1.1']);
+} catch (_) {}
 
 /**
  * Connect to MongoDB with connection pooling and event listeners.
