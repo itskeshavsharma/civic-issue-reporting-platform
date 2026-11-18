@@ -104,6 +104,12 @@ Thumbs.db
 **/Thumbs.db
 desktop.ini
 
+# --- Presentation & Office Files ---
+*.pptx
+*.ppt
+~$*.pptx
+~$*.ppt
+
 # --- IDE & Editor Configs ---
 .idea/
 **/.idea/
