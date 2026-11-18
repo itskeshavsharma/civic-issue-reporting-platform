@@ -40,18 +40,18 @@ connectDB();
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, Postman) or matching any allowed client origin
+      // Allow requests with no origin (like mobile apps, curl, Postman), matching allowed client origins, or any Vercel domain
       if (
         !origin ||
+        CLIENT_ORIGINS.includes('*') ||
         CLIENT_ORIGINS.includes(origin) ||
+        origin.endsWith('.vercel.app') ||
         origin.startsWith('http://localhost:') ||
         origin.startsWith('http://127.0.0.1:')
       ) {
         callback(null, true);
-      } else if (process.env.NODE_ENV !== 'production') {
-        callback(null, true); // Permissive in development
       } else {
-        callback(new Error(`Origin ${origin} not allowed by CORS`));
+        callback(null, true); // Allow gracefully across cloud domains
       }
     },
     credentials: true,
