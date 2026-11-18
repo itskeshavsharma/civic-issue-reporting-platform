@@ -61,9 +61,11 @@ wheels/
 *.egg
 
 # --- Machine Learning Model Weights & Large Checkpoints ---
-# (Prevent pushing multi-gigabyte models into Git)
-models/
-**/models/
+# (Prevent pushing multi-gigabyte models into Git, but keep Node.js backend schemas)
+micro-service/models/
+**/micro-service/models/
+!backend/models/
+!backend/models/**
 *.pt
 **/*.pt
 *.pth
@@ -77,7 +79,9 @@ models/
 .cache/
 **/.cache/
 
-# --- Uploads, Temporary Media & Logs ---
+# --- Local Backups & Scratch ---
+hf-backup/
+**/hf-backup/
 uploads/
 **/uploads/
 logs/
