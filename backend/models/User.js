@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+require('./Ward');
+require('./Department');
 
 const UserSchema = new mongoose.Schema(
   {

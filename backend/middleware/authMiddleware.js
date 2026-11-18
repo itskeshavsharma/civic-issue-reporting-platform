@@ -1,5 +1,7 @@
 const { admin, auth } = require('../config/firebase');
 const User = require('../models/User');
+require('../models/Ward');
+require('../models/Department');
 
 /**
  * Express middleware to authenticate requests using Firebase ID Token.

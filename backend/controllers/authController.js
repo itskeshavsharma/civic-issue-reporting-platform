@@ -1,4 +1,6 @@
 const User = require('../models/User');
+require('../models/Ward');
+require('../models/Department');
 
 /**
  * 5-Tier Role Permissions Matrix

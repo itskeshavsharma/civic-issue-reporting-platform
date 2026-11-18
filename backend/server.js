@@ -9,6 +9,14 @@ const mongoose = require('mongoose');
 
 const connectDB = require('./config/db');
 const { admin } = require('./config/firebase');
+
+// Register all Mongoose models eagerly for population
+require('./models/User');
+require('./models/Ward');
+require('./models/Department');
+require('./models/Complaint');
+require('./models/Notification');
+require('./models/AuditLog');
 const complaintRoutes = require('./routes/complaintRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 const adminRoutes = require('./routes/adminRoutes');
